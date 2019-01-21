@@ -23,8 +23,10 @@ public class AuthHandler implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) {
 
-        request.setAttribute("sessionInfo", parseSession(request)
-                .orElseThrow(AuthenticationException::new));
+        SessionInfo sessionInfo = parseSession(request)
+                .orElseThrow(AuthenticationException::new);
+
+        request.setAttribute("sessionInfo", sessionInfo);
 
         return true;
     }
